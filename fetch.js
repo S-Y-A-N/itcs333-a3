@@ -1,9 +1,11 @@
+// Fetch data from given API url, returns the results
 async function getData(url) {
   const response = await fetch(url);
   const data = await response.json();
   return data.results;
 }
 
+// Display data inside a table in HTML
 function displayData(data) {
   data.forEach(d => {
     const tbody = document.querySelector('tbody');
@@ -33,7 +35,8 @@ function displayData(data) {
   });
 }
 
-const result = getData("https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100").then(data => {
-  console.log(data);
+// Call getData
+// The result is wrapped in a Promise object, so we use 'then' to get the actual result and display it
+getData("https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100").then(data => {
   displayData(data);
 });
